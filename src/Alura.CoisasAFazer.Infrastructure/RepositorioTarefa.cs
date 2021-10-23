@@ -9,37 +9,37 @@ namespace Alura.CoisasAFazer.Infrastructure
     {
         DbTarefasContext _ctx;
 
-        public RepositorioTarefa()
+        public RepositorioTarefa(DbTarefasContext context)
         {
-            _ctx = new DbTarefasContext();
+            this._ctx = context;
         }
 
         public void AtualizarTarefas(params Tarefa[] tarefas)
         {
-            _ctx.Tarefas.UpdateRange(tarefas);
-            _ctx.SaveChanges();
+            this._ctx.Tarefas.UpdateRange(tarefas);
+            this._ctx.SaveChanges();
         }
 
         public void ExcluirTarefas(params Tarefa[] tarefas)
         {
-            _ctx.Tarefas.RemoveRange(tarefas);
-            _ctx.SaveChanges();
+            this._ctx.Tarefas.RemoveRange(tarefas);
+            this._ctx.SaveChanges();
         }
 
         public void IncluirTarefas(params Tarefa[] tarefas)
         {
-            _ctx.Tarefas.AddRange(tarefas);
-            _ctx.SaveChanges();
+            this._ctx.Tarefas.AddRange(tarefas);
+            this._ctx.SaveChanges();
         }
 
         public Categoria ObtemCategoriaPorId(int id)
         {
-            return _ctx.Categorias.FirstOrDefault(c => c.Id == id);
+            return this._ctx.Categorias.FirstOrDefault(c => c.Id == id);
         }
 
         public IEnumerable<Tarefa> ObtemTarefas(Func<Tarefa, bool> filtro)
         {
-            return _ctx.Tarefas.Where(filtro);
+            return this._ctx.Tarefas.Where(filtro);
         }
     }
 }
